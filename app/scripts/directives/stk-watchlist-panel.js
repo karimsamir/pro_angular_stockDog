@@ -1,7 +1,7 @@
 'use strict';
 angular.module('stockDogApp')
 // [1] Register directive and inject dependencies
-        .directive('stkWatchlistPanel', function ($location, $modal, WatchlistService) {
+        .directive('stkWatchlistPanel', function ($location, $modal, $routeParams, WatchlistService) {
             return {
                 templateUrl: 'views/templates/watchlist-panel.html',
                 restrict: 'E',
@@ -31,6 +31,11 @@ angular.module('stockDogApp')
                         WatchlistService.remove(list);
                         $location.path('/');
                     };
+                    
+                    $scope.currentList = $routeParams.listId;
+                    $scope.gotoList = function (listId) {
+                    $location.path('watchlist/' + listId);
+};
                 }
             };
         });
